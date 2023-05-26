@@ -17,7 +17,7 @@ npm install --save-dev rollup-plugin-exclude-dependencies-from-bundle
 import excludeDependenciesFromBundle from "rollup-plugin-exclude-dependencies-from-bundle";
 
 export default {
-  plugins: [excludeDependenciesFromBundle(/*{ plugin options }*/)]
+  plugins: [excludeDependenciesFromBundle(/*{ plugin options }*/)],
 };
 ```
 
@@ -30,3 +30,7 @@ export default {
 - `dependencies`: true
 
       	Set to true for excluding dependencies from the bundled files.
+
+- `keep`: string[]
+
+      	Set this array with values you want to exclude from rollup external.
