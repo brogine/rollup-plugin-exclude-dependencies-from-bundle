@@ -23,5 +23,21 @@ describe("getExternal", () => {
       expect(fn("lodash-es")).toBe(false);
       expect(fn("rollup")).toBe(false);
     });
+
+    it("given a keep value, it returns false for matching dependencies", () => {
+      const fn = getExternal(
+        ["redux", "redux-saga", "reselect"],
+        false,
+        false,
+        ["reselect"]
+      );
+
+      expect(fn("redux")).toBe(true);
+      expect(fn("redux/compose")).toBe(true);
+      expect(fn("redux-saga")).toBe(true);
+      expect(fn("babel-plugin-lodash")).toBe(false);
+      expect(fn("lodash-es")).toBe(false);
+      expect(fn("reselect")).toBe(false);
+    });
   });
 });

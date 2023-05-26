@@ -6,7 +6,8 @@ const getDeps = (dependencies: Array<string>, includeFlag = true) =>
 export const getExternal = (
   modules: string[] = [],
   peerDependenciesFlag = true,
-  dependenciesFlag = true
+  dependenciesFlag = true,
+  keep: string[] = []
 ): string[] | ((module: string) => boolean) => {
   const packageFilePath: string = path.resolve(process.cwd(), "package.json");
   // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -23,7 +24,7 @@ export const getExternal = (
     ...peerDependenciesKeys,
     ...dependenciesKeys,
   ]
-    .filter((module) => module)
+    .filter((module) => module && !keep.includes(module))
     .map((externalModule) => new RegExp("^" + externalModule + "(\\/.+)*$"));
 
   return (module) => externalModules.some((regexp) => regexp.test(module));
